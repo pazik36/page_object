@@ -1,21 +1,36 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 
+from selenium.common.exceptions import NoSuchElementException
+
 class ProductPage(BasePage):
     def add_product_to_basket(self):
         add_to_basket_button = self.browser.find_element(*ProductPageLocators.ADD_BASKET_BUTTON)
         add_to_basket_button.click()
 
-    def should_be_message_about_added_book(self):
-        book_name = self.browser.find_element(*ProductPageLocators.BOOK_NAME).text
+    def should_be_message_about_added_product(self, expected_product_name: str):
         success_message = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE).text
 
-        assert book_name in success_message, f'Successfull message does not contain book name. Book name: {book_name}, Message: {success_message}'
+        assert expected_product_name in success_message, f'Successfull message does not contain product name. Book name: {product_name}, Message: {success_message}'
     
-    def should_busket_price_equals_to_book_price(self):
-        book_price = self.browser.find_element(*ProductPageLocators.BOOK_PRICE).text
+    def should_busket_price_equals_to_product_price(self, expected_product_price: str):
         busket_price = self.browser.find_element(*ProductPageLocators.BUSKECT_PRICE).text
 
-        assert book_price in busket_price, f'Busket price is not correct.Bussket price: {busket_price}, Book price: {book_price}'
+        assert expected_product_price in busket_price, f'Busket price is not correct.Bussket price: {busket_price}, Book price: {product_price}'
+
+    def get_price(self)->str:
+        try:
+            return self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
+        except NoSuchElementException:
+            return None
         
+    def get_product_name(self)->str:
+        try:
+            return self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+        except NoSuchElementException:
+            return None
+        
+
+          
+
     
