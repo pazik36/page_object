@@ -10,13 +10,12 @@ class ProductPage(BasePage):
 
     def should_be_message_about_added_product(self, expected_product_name: str):
         success_message = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE).text
-
-        assert expected_product_name in success_message, f'Successfull message does not contain product name. Book name: {product_name}, Message: {success_message}'
+        expected_message = f"{expected_product_name} был добавлен в вашу корзину."
+        assert expected_message in success_message, f'Successfull message does not contain product name. Book name: {expected_product_name}, Message: {success_message}'
     
     def should_busket_price_equals_to_product_price(self, expected_product_price: str):
         busket_price = self.browser.find_element(*ProductPageLocators.BUSKECT_PRICE).text
-
-        assert expected_product_price in busket_price, f'Busket price is not correct.Bussket price: {busket_price}, Book price: {product_price}'
+        assert expected_product_price in busket_price, f'Busket price is not correct.Bussket price: {busket_price}, Book price: {expected_product_price}'
 
     def get_price(self)->str:
         try:
