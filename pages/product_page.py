@@ -46,8 +46,3 @@ class ProductPage(BasePage):
         page = ProductPage(browser, link)
         page.open()
         page.go_to_login_page()
-        
-
-          
-
-    
