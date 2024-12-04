@@ -17,6 +17,12 @@ class ProductPage(BasePage):
         busket_price = self.browser.find_element(*ProductPageLocators.BUSKECT_PRICE).text
         assert expected_product_price in busket_price, f'Busket price is not correct.Bussket price: {busket_price}, Book price: {expected_product_price}'
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE),"Success message is presented, but should not be"
+        
+    def should_disappear_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), 'Message is not disapeared'   
+    
     def get_price(self)->str:
         try:
             return self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
