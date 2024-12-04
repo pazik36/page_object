@@ -13,3 +13,7 @@ class ProductPageLocators():
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, "div.alertinner")
     PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
     BUSKECT_PRICE = (By.CSS_SELECTOR, "div.alert-info .alertinner strong")
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
